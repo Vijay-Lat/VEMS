@@ -1,0 +1,76 @@
+.set{
+    width: 400px;
+    position: relative;
+    left: 320px;
+    top :20px;
+    font-weight: bolder;
+
+}
+
+.vac-head{
+    text-align: center;
+   
+}
+.border
+{
+    border-color: blueviolet 10px solid ;
+    font-size:50px;
+    text-decoration: none;
+    border-radius: 10px;
+    background-color:pink;
+    position: relative;
+    nav-left: auto;
+
+    
+}
+
+.save-btn{
+    position: relative;
+    left: 460px;
+    top: 35px;
+    width: 100px;
+    height: 50px;
+    background-color: magenta;
+    border-radius: 10px;
+    font-weight: bolder;
+}
+.headingColour{
+    background-color:green;
+}
+.bgColor{
+    background-color:lightblue;
+}
+.ptintbtn{
+    position: relative;
+    left: 800px;
+}
+.searchTab{
+    width:250px;
+
+    position: relative;
+    left: 5px;
+    top :20px;
+    font-weight: bolder;
+
+}
+.cardsGenerate{
+    width: 100%;
+
+}
+.labelTag
+{
+    font-weight: bolder;
+}
+.printBtn{
+    position: relative;
+    left: auto;
+}
+button a {
+    text-decoration: none;
+}
+button{
+    background-color: lightcoral;
+    border-radius: 10px;
+    display: flex;
+    justify-content:left;
+}

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="formloop.css">
+    <title>Registered USers</title>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    
+      <a class="border" href="index.html">VEMS</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     <button class="btn btn-outline-success printBtn" onclick="printReport()"" type="button">PrintReport</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     <div class="searchBar">
+      <label for="mobileNo" class="labelTag">MobileNo :</label>
+      <input id="mobile" type="tel" value=" " name="mobileNo" onchange=""  >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <button type="button" onclick="searchNumber()">Search</button>
+      <!-- <label for="Name" class="labelTag">Name :</label>
+      <input type="text" value=" " name="Name" onchange=""id="searchItem" > -->
+    </nav>
+    
+  </div>
+    <br><br>
+    <div  > 
+        <table class="table">
+            <thead class="headingColour">
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Mobile No.</th>
+                <th scope="col">Meet</th>
+                <th scope="col">Location</th>
+                <th scope="col">Purpose</th>
+                <th scope="col">Date</th>
+                <th scope="col">VisitorID</th>
+                <th scope="col">In time:</th>
+                <th scope="col">Out time:</th>
+                
+              </tr>
+            </thead>
+            
+              
+            <tbody id="table">
+                
+            </tbody>
+        </table>
+        <!-- <button onclick="getData();">getData</button> -->
+    </div>
+    <script>
+      // let table=document.getElementsByTagName('div');
+      // table.addEventListener('load',getData());
+      function printReport() {
+    window.print();
+}
+    
+    
+  
+    let newData=[];  
+        let dataLength=0; 
+        getData();
+    function getData(){
+         
+fetch('http://161.35.3.78/VEMS/api/version1/visitors')
+.then(response=>response.json())
+.then(data=>{
+    newData.push(data)
+     console.log(newData[0].data.length);
+     
+     bindData();
+});
+    }
+function searchNumber(){
+  let mobileNumber=document.getElementById('mobile').value;
+  fetch('http://161.35.3.78/VEMS/api/version1/visitors')
+.then(response=>response.json())
+.then(data=>{
+    newData.push(data)
+    
+     const newRecord=newData[0].data.filter((number)=>{
+       return (
+         number.mobileNo.includes(mobileNumber);
+       )
+     })
+     
+     bindData();
+
+}
+
+
+function bindData(){
+let newHtmlText=""; 
+         
+dataLength=newData[0].data.length; 
+         for(let i=0;i<dataLength;i++)
+          {
+              newHtmlText+="<tr>"
+              newHtmlText+=  "<td>"+newData[0].data[i].visitorName +"</td>"
+              newHtmlText+= "<td>"+newData[0].data[i].mobileNo +"</td>"
+              newHtmlText+="<td>"+newData[0].data[i].whomToMeet +"</td>"
+              newHtmlText+="<td>"+newData[0].data[i].address +"</td>"
+              newHtmlText+="<td>"+newData[0].data[i].purpose +"</td>"
+              newHtmlText+="<td>"+newData[0].data[i].dateOfVisit +"</td>"
+              newHtmlText+="<td>"+newData[0].data[i].visitorId +"</td>"
+              newHtmlText+="<td>"+newData[0].data[i].inTime +"</td>"
+            
+
+
+              newHtmlText+="</tr>"
+          }
+
+        
+
+          document.getElementById('table').innerHTML=newHtmlText;
+          
+        }
+        // creating search function 
+        function searchUserName(){
+          let visitorName=document.getElementById('searchItem').value;
+                   
+fetch('http://161.35.3.78/VEMS/api/version1/visitors')
+.then(response=>response.json())
+.then(data=>{
+    newData.push(data)
+     console.log(newData[0].data.length);
+     
+     bindData();
+});
+
+
+
+        }
+
+    </script>
+</body>
+</html>
